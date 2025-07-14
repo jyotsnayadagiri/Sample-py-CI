@@ -10,4 +10,4 @@ def client():
 
 def test_hello_world(client):
     rv = client.get('/')
-    assert rv.data == b'Hello, Harness CI from Python!'
+    assert rv.data == b'Hello, Harness CI from Python12!'
