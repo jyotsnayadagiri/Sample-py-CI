@@ -8,10 +8,10 @@ metadata:
 spec:
   selector:
     app: python-app
-    version: blue # Initially points to the 'blue' deployment (Harness will manage this)
+    version: "{{ .Values.versionLabel }}" # Dynamic version label (from values.yaml)
+    harness.io/color: "{{ .Values.colorLabel }}" # <--- NEW: Required by Harness for Blue/Green
   ports:
     - protocol: TCP
       port: 80 # Service port
       targetPort: 5000 # Container port
   type: LoadBalancer # Or ClusterIP, NodePort, depending on your needs
-
