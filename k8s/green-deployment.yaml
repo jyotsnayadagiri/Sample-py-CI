@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python-app-green # Unique name for the green deployment
+  name: python-app1-green # Unique name for the green deployment
   labels:
-    app: python-app
+    app: python-app1
     version: green # Label to identify this as the green version
 spec:
   replicas: 4 # Number of replicas for your green environment
@@ -23,3 +23,27 @@ spec:
         image: jyotsnayadagiri/python-ci:v2 # New image version
         ports:
         - containerPort: 5000
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-1-28
+  labels:
+    app: nginx-1-28
+    version: green
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+      version: green
+  template:
+    metadata:
+      labels:
+        app: nginx
+        version: green
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.28
+          ports:
+            - containerPort: 8080
