@@ -8,9 +8,10 @@ metadata:
 spec:
   selector:
     app: python-app
-    version: green # Initially points to the 'blue' deployment
+    version: blue # Initially points to the 'blue' deployment (Harness will manage this)
   ports:
     - protocol: TCP
       port: 80 # Service port
       targetPort: 5000 # Container port
   type: LoadBalancer # Or ClusterIP, NodePort, depending on your needs
+
