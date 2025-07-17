@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: {{ .Values.image }}
+        image: <+artifact.image>
         ports:
         - containerPort: 5000
