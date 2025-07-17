@@ -1,1 +1,1 @@
-image: jyotsnayadagiri/python-ci:<+pipeline.executionId>
+image: jyotsnayadagiri/python-ci:v1
