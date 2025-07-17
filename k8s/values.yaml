@@ -1,4 +1,4 @@
 # app-values.yaml
 image:  "jyotsnayadagiri/python-ci:latest" # This will be overridden by Harness artifact
-versionLabel: "blue" # This will be overridden by Harness for blue/green
+
 colorLabel: "blue" 
