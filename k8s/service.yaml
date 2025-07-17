@@ -1,12 +1,16 @@
+# service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-app-service
+  name: python-app-service # Stable service name
+  labels:
+    app: python-app
 spec:
-  type: LoadBalancer
   selector:
     app: python-app
+    version: green # Initially points to the 'blue' deployment
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 5000
+      port: 80 # Service port
+      targetPort: 5000 # Container port
+  type: LoadBalancer # Or ClusterIP, NodePort, depending on your needs
