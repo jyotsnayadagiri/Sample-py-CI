@@ -8,8 +8,7 @@ metadata:
 spec:
   selector:
     app: python-app
-    version: "{{ .Values.versionLabel }}" # Dynamic version label (from values.yaml)
-    harness.io/color: "{{ .Values.colorLabel }}" # <--- NEW: Required by Harness for Blue/Green
+    harness.io/color: "{{ .Values.colorLabel }}" # Required by Harness for Blue/Green
   ports:
     - protocol: TCP
       port: 80 # Service port
