@@ -1,25 +1,31 @@
+# deployment-template.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  # Harness will dynamically name this, e.g., python-app-blue or python-app-green
-  name: python-app-{{ .Values.versionLabel }}
+  # The name will be dynamically set by Harness, e.g., python-app-blue or python-app-green
+  # The entire string including the template must be quoted
+  name: "python-app-{{ .Values.versionLabel }}"
   labels:
     app: python-app
-    version: {{ .Values.versionLabel }} # Dynamic label for blue or green
+    # The entire string including the template must be quoted
+    version: "{{ .Values.versionLabel }}"
 spec:
   replicas: 4 # Number of replicas for your environment
   selector:
     matchLabels:
       app: python-app
-      version: {{ .Values.versionLabel }} # Selector must match the dynamic pod labels
+      # The entire string including the template must be quoted
+      version: "{{ .Values.versionLabel }}"
   template:
     metadata:
       labels:
         app: python-app
-        version: {{ .Values.versionLabel }} # Pods created by this deployment will have the dynamic label
+        # The entire string including the template must be quoted
+        version: "{{ .Values.versionLabel }}"
     spec:
       containers:
       - name: python-app
-        image: {{ .Values.image }} # Image will be injected by Harness
+        # The entire string including the template must be quoted
+        image: "{{ .Values.image }}"
         ports:
         - containerPort: 5000
