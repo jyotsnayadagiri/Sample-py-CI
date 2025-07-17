@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: python-app
-        image: jyotsnayadagiri/python-ci:<+pipeline.executionId>
+        image: jyotsnayadagiri/python-ci:<+artifact.image>
         ports:
         - containerPort: 5000
