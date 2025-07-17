@@ -1,1 +1,3 @@
-image: jyotsnayadagiri/python-ci:v1
+# app-values.yaml
+image: "placeholder/image:latest" # This will be overridden by Harness artifact
+versionLabel: "blue" # This will be overridden by Harness for blue/green
