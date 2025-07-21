@@ -2,19 +2,19 @@
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: <+service.name>-destinationrule # Harness will resolve this to e.g., python-sample-app-service-destinationrule
+  name: python-app-service-destinationrule # Harness will resolve this to e.g., python-sample-app-service-destinationrule
   namespace: "{{ .Values.namespace }}" # Or your specific namespace
 spec:
-  host: <+service.name> # This should be the name of your Kubernetes Service (python-sample-app-service)
+  host: python-app-service # This should be the name of your Kubernetes Service (python-sample-app-service)
   subsets:
     - name: stable # Subset for the stable version
       labels:
         # These labels should match labels on your stable deployment's pods
         # Harness adds these automatically, so 'app: <service.name>' should suffice
-        app: <+service.name>
+        app: python-app-service
         # And Harness will likely add a version label, e.g., 'harness.io/version': 'stable'
     - name: canary # Subset for the canary version
       labels:
         # These labels should match labels on your canary deployment's pods
-        app: <+service.name>
+        app: python-app-service
         # And Harness will likely add a version label, e.g., 'harness.io/version': '<+build.number>'
