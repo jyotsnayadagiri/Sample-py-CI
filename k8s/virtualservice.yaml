@@ -3,7 +3,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
   name: virtual-service-<+service.name> # This *must* match the name in your pipeline's trafficRouting spec
-  namespace: <+env.namespace> # Or your specific namespace
+  namespace: "{{ .Values.namespace }}" # Or your specific namespace
 spec:
   hosts:
     - "*" # Or your specific domain/host if you have one configured with Istio IngressGateway
