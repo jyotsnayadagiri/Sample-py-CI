@@ -3,7 +3,7 @@ apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
   name: <+service.name>-destinationrule # Harness will resolve this to e.g., python-sample-app-service-destinationrule
-  namespace: <+env.namespace> # Or your specific namespace
+  namespace: "{{ .Values.namespace }}" # Or your specific namespace
 spec:
   host: <+service.name> # This should be the name of your Kubernetes Service (python-sample-app-service)
   subsets:
