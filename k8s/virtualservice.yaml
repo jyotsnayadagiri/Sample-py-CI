@@ -2,7 +2,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: virtual-service-<+service.name> # This *must* match the name in your pipeline's trafficRouting spec
+  name: virtual-service-python-app-service # This *must* match the name in your pipeline's trafficRouting spec
   namespace: "{{ .Values.namespace }}" # Or your specific namespace
 spec:
   hosts:
@@ -12,12 +12,12 @@ spec:
   http:
     - route:
       - destination:
-          host: <+service.name> # Points to your Kubernetes Service
+          host: python-app-service # Points to your Kubernetes Service
           subset: stable # Initially route all traffic to the stable subset
         weight: 100
       # You can optionally define the canary subset here with 0 weight, or Harness can add it.
       # Harness will update these weights directly.
       # - destination:
-      #     host: <+service.name>
+      #     host: python-app-service
       #     subset: canary
       #   weight: 0
