@@ -1,4 +1,8 @@
 # app-values.yaml
 image:  "jyotsnayadagiri/python-ci:latest" # This will be overridden by Harness artifact
-
+# k8s/values.yaml
+# Variables for Istio manifests
+serviceName: python-sample-app-service # This must match your K8s service name
+namespace: default # This is a Harness variable, so it goes in values.yaml
+#imageTag: <+build.number> # Or <+artifact.image.tag>
 colorLabel: "blue" 
