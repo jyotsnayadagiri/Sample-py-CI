@@ -1,0 +1,23 @@
+# k8s/virtualservice.yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: virtual-service-<+service.name> # This *must* match the name in your pipeline's trafficRouting spec
+  namespace: <+env.namespace> # Or your specific namespace
+spec:
+  hosts:
+    - "*" # Or your specific domain/host if you have one configured with Istio IngressGateway
+  gateways:
+    - istio-system/ingress-gateway # Or the name of your Istio Ingress Gateway
+  http:
+    - route:
+      - destination:
+          host: <+service.name> # Points to your Kubernetes Service
+          subset: stable # Initially route all traffic to the stable subset
+        weight: 100
+      # You can optionally define the canary subset here with 0 weight, or Harness can add it.
+      # Harness will update these weights directly.
+      # - destination:
+      #     host: <+service.name>
+      #     subset: canary
+      #   weight: 0
