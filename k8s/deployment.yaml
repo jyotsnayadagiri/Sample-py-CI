@@ -12,6 +12,7 @@ spec:
   selector:
     matchLabels:
       app: python-app
+      harness.io/track: stable
       # Harness will automatically match on harness.io/color for traffic routing
   template:
     metadata:
