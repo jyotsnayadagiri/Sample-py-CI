@@ -5,6 +5,7 @@ metadata:
   name: python-app # Harness will append -blue or -green suffixes internally
   labels:
     app: python-app
+    harness.io/track: stable
     # Harness will inject harness.io/color: blue or harness.io/color: green onto the pods
 spec:
   replicas: 4 # Number of replicas for your environment
