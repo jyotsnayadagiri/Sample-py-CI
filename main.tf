@@ -1,12 +1,15 @@
 provider "google" {
   project = "harness-466107"
-  region  = "us-west1"  # Changed region
+  region  = "us-west1"
   zone    = "us-west1-a"
 }
 
 resource "google_compute_instance" "vm" {
   name         = "notes-vm"
   machine_type = "e2-micro"
+
+  # ADDED: Assign a network tag to the VM
+  tags = ["http-server"]
 
   boot_disk {
     initialize_params {
@@ -25,6 +28,23 @@ resource "google_compute_instance" "vm" {
     apt-get install -y docker.io git
     docker run -d -p 80:5000 docker.io/jyotsnayadagiri/python-ci:latest
   EOT
+}
+
+# ADDED: This resource creates a firewall rule to allow HTTP traffic
+resource "google_compute_firewall" "allow_http" {
+  name    = "allow-http-80"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports    = ["80"]
+  }
+
+  # This allows traffic from anywhere
+  source_ranges = ["0.0.0.0/0"]
+
+  # This applies the rule to the VM with the "http-server" tag
+  target_tags   = ["http-server"]
 }
 
 output "app_url" {
