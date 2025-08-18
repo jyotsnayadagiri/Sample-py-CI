@@ -1,7 +1,7 @@
 provider "google" {
   project = "harness-466107"
-  region  = "us-central1"
-  zone    = "us-central1-a"
+  region  = "us-west1"  # Changed region
+  zone    = "us-west1-a"
 }
 
 resource "google_compute_instance" "vm" {
