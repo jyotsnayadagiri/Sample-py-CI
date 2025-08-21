@@ -30,19 +30,8 @@ resource "google_compute_instance" "vm" {
   metadata_startup_script = <<-EOT
     #!/bin/bash
     apt-get update -y
-    apt-get install -y docker.io
-    
-    # Run the Docker container
-    docker run -d \
-      --name todo-app \
-      -p 80:8080 \
-      -e SPRING_DATASOURCE_URL=jdbc:h2:mem:testdb \
-      -e SPRING_DATASOURCE_DRIVER_CLASS_NAME=org.h2.Driver \
-      -e SPRING_DATASOURCE_USERNAME=sa \
-      -e SPRING_DATASOURCE_PASSWORD=password \
-      -e SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop \
-      -e SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.H2Dialect \
-      jyotsnayadagiri/mavenjy:latest
+    apt-get install -y docker.io git
+    docker run -d -p 80:5000 docker.io/jyotsnayadagiri/python-ci:latest
   EOT
 }
 
@@ -76,3 +65,4 @@ output "vm_instance_ip" {
   description = "Public IP address of the VM instance"
   value       = google_compute_instance.vm.network_interface[0].access_config[0].nat_ip
 }
+
