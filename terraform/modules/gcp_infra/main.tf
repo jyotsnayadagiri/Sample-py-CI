@@ -22,7 +22,10 @@ resource "google_compute_instance" "vm" {
     #!/bin/bash
     apt-get update -y
     apt-get install -y docker.io git
-    docker run -d -p 80:5000 docker.io/jyotsnayadagiri/python-ci:latest
+    
+    systemctl start docker
+    systemctl start docker
+    docker run -d -p 8080:8080 docker.io/jyotsnayadagiri/python-ci:latest
   EOT
 }
 
@@ -33,7 +36,7 @@ resource "google_compute_firewall" "allow_http" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80"]
+    ports    = ["8080"]
   }
 
   # This allows traffic from anywhere
@@ -49,6 +52,7 @@ output "vm_instance_ip" {
   value = "http://${google_compute_instance.vm.network_interface[0].access_config[0].nat_ip}"
 
 }
+
 
 
 
