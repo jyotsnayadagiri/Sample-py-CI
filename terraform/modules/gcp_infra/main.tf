@@ -47,11 +47,10 @@ resource "google_compute_firewall" "allow_http" {
 }
 
 
-output "vm_instance_ip" {
-  description = "Public IP address of the VM instance"
+output "app_url" {
   value = "http://${google_compute_instance.vm.network_interface[0].access_config[0].nat_ip}"
-
 }
+
 
 
 
