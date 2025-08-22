@@ -1,7 +1,4 @@
-resource "google_service_account" "provisioner_sa" {
-  account_id   = "provisioner-sa"
-  display_name = "Provisioner Service Account"
-}
+
 
 resource "google_compute_instance" "vm" {
   name         = "notes-vm"
@@ -22,10 +19,7 @@ resource "google_compute_instance" "vm" {
     access_config {}
   }
 
-  service_account {
-    email  = google_service_account.provisioner_sa.email
-    scopes = ["cloud-platform"]
-  }
+  
 
   metadata_startup_script = <<-EOT
     #!/bin/bash
@@ -65,4 +59,5 @@ output "vm_instance_ip" {
   description = "Public IP address of the VM instance"
   value       = google_compute_instance.vm.network_interface[0].access_config[0].nat_ip
 }
+
 
