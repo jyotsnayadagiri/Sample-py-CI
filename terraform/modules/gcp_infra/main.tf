@@ -23,7 +23,7 @@ resource "google_compute_instance" "vm" {
     apt-get update -y
     apt-get install -y docker.io git
     
-    systemctl start docker
+    systemctl enable docker
     systemctl start docker
     docker run -d -p 8080:8080 docker.io/jyotsnayadagiri/python-ci:latest
   EOT
@@ -31,7 +31,7 @@ resource "google_compute_instance" "vm" {
 
 # ADDED: This resource creates a firewall rule to allow HTTP traffic
 resource "google_compute_firewall" "allow_http" {
-  name    = "allow-http-80"
+  name    = "allow-http-8080"
   network = "default"
 
   allow {
@@ -52,6 +52,7 @@ output "vm_instance_ip" {
   value = "http://${google_compute_instance.vm.network_interface[0].access_config[0].nat_ip}"
 
 }
+
 
 
 
