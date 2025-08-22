@@ -1,8 +1,4 @@
-provider "google" {
-  project = "harness-466107"
-  region  = "us-west1"
-  zone    = "us-west1-a"
-}
+
 
 resource "google_compute_instance" "vm" {
   name         = "notes-vm"
