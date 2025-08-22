@@ -5,19 +5,33 @@ kind: Service
 # This name is what your service will be called in Google Cloud.
 metadata:
   name: harness-ci-python-app
+  annotations:
+    # Annotations for services
+    run.googleapis.com/ingress: "all"  # Allow public access
+    run.googleapis.com/allow-unauthenticated: "true"
+    run.googleapis.com/invoker-iam-disabled: 'true'
 
 # The spec defines the desired configuration of the service.
 spec:
   # The template defines the revision of the service.
   template:
+    metadata:
+      annotations:
+        # These annotations apply to REVISIONS
+        autoscaling.knative.dev/minScale: "1"  # Prevent zero scaling
+        autoscaling.knative.dev/maxScale: "5"  # Limit maximum instances
     spec:
       containers:
         # The image path where Harness will push the built container.
         # The <+artifact.image> is a Harness expression that automatically
         # injects the correct image tag from the build pipeline.
         # You do not need to change this.
-        - image: <+artifact.image>
+        - image: jyotsnayadagiri/python-ci:latest
           ports:
             # Your app.py is listening on port 5000, so we set
             # the containerPort to 5000 to match.
             - containerPort: 5000
+
+
+  
+s
