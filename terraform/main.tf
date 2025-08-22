@@ -1,9 +1,5 @@
 
-# Create a service account
-resource "google_service_account" "todo_app_sa" {
-  account_id   = var.service_account_name
-  display_name = "Service Account for Todo App"
-}
+
 
 
 
