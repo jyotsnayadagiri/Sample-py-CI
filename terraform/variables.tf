@@ -48,7 +48,7 @@ variable "network_name" {
 variable "firewall_ports" {
   description = "List of ports to open in firewall"
   type        = list(string)
-  default     = ["8080", "22"]
+  default     = ["80", "22"]
 }
 
 variable "bucket_name" {
@@ -68,3 +68,4 @@ variable "service_account_name" {
   type        = string
   default     = "todo-app-sa"
 }
+
