@@ -6,7 +6,7 @@ resource "google_compute_instance" "vm" {
   zone         = "us-west1-a"
   
   # TAGS MUST BE INSIDE THE RESOURCE BLOCK
-  tags = ["http-server", "ssh"]
+  tags = ["http-server"]
 
   boot_disk {
     initialize_params {
@@ -43,21 +43,12 @@ resource "google_compute_firewall" "allow_http" {
   target_tags   = ["http-server"]
 }
 
-resource "google_compute_firewall" "allow_ssh" {
-  name    = "allow-ssh"
-  network = "default"
 
-  allow {
-    protocol = "tcp"
-    ports    = ["22"]
-  }
-
-  source_ranges = ["0.0.0.0/0"]
-  target_tags   = ["ssh"]
-}
 output "vm_instance_ip" {
   description = "Public IP address of the VM instance"
-  value       = google_compute_instance.vm.network_interface[0].access_config[0].nat_ip
+  value = "http://${google_compute_instance.vm.network_interface[0].access_config[0].nat_ip}"
+
 }
+
 
 
