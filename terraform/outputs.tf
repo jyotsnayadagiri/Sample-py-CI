@@ -11,9 +11,7 @@ output "bucket_url" {
 
 
 
-output "application_url" {
-  description = "URL to access the Todo application"
-  value       = "http://${module.gcp_infra.vm_instance_ip}:8080"
-}
+
+
 
 
