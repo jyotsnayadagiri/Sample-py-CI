@@ -1,16 +1,23 @@
-# service.yaml
-apiVersion: v1
+apiVersion: serving.knative.dev/v1
 kind: Service
+
+# Metadata for your service, including a descriptive name.
+# This name is what your service will be called in Google Cloud.
 metadata:
-  name: python-app-service # Stable service name
-  labels:
-    app: python-app
+  name: harness-ci-python-app
+
+# The spec defines the desired configuration of the service.
 spec:
-  selector:
-    app: python-app # <--- REMOVE: harness.io/color: "blue" here
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 5000
-      name: http # Important for Istio!
-  type: LoadBalancer # Or ClusterIP, NodePort, depending on your needs
+  # The template defines the revision of the service.
+  template:
+    spec:
+      containers:
+        # The image path where Harness will push the built container.
+        # The <+artifact.image> is a Harness expression that automatically
+        # injects the correct image tag from the build pipeline.
+        # You do not need to change this.
+        - image: <+artifact.image>
+          ports:
+            # Your app.py is listening on port 5000, so we set
+            # the containerPort to 5000 to match.
+            - containerPort: 5000
